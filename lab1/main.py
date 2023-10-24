@@ -6,7 +6,7 @@ import draw_landmarks
 
 def main():
     # start video capture through webcam
-    GAME_MODE = 1
+    GAME_MODE = 2
     cap = cv2.VideoCapture(0)
 
     test_landmarker = MP_Controller(GAME_MODE)
@@ -31,6 +31,8 @@ def main():
 
         try:
             test_landmarker.get_index_tip_coordinates()
+            if GAME_MODE == 2:
+                test_landmarker.get_mouth_coordinates()
         except:
             pass
 

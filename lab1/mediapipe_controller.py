@@ -94,6 +94,30 @@ class MP_Controller:
                 # self.hand_result.hand_landmarks[0][8].z,
             )
 
+    def get_mouth_coordinates(self):
+        if self.face_result.face_landmarks != []:
+            print(
+                "FaceLandmark.upperMOUTH position:\n {}".format(
+                    self.face_result.face_landmarks[0][13]
+                )
+            )  # (HandLandmark.INDEX_FINGER_TIP=8)
+            print(
+                "FaceLandmark.lowerMOUTH position:\n {}".format(
+                    self.face_result.face_landmarks[0][14]
+                )
+            )  # (HandLandmark.INDEX_FINGER_TIP=8)
+            return (
+                (
+                    self.face_result.face_landmarks[0][13].x,
+                    self.face_result.face_landmarks[0][13].y
+                ),
+                (
+                    self.face_result.face_landmarks[0][14].x,
+                    self.face_result.face_landmarks[0][14].y
+                )
+                # self.face_result.face_landmarks[0][13].z,
+            )  # GET MOUTH POSITION
+
     def close(self):
         # close landmarker
         self.hand_landmarker.close()

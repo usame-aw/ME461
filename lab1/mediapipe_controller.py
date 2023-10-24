@@ -90,7 +90,7 @@ class MP_Controller:
             # GET INDEX_FINGER POSITION
             return (
                 self.hand_result.hand_landmarks[0][8].x,
-                self.hand_result.hand_landmarks[0][8].y,
+                self.hand_result.hand_landmarks[0][8].y
                 # self.hand_result.hand_landmarks[0][8].z,
             )
 

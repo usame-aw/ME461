@@ -6,7 +6,7 @@ import draw_landmarks
 
 def main():
     # start video capture through webcam
-    GAME_MODE = 2
+    GAME_MODE = 1
     cap = cv2.VideoCapture(0)
 
     test_landmarker = MP_Controller(GAME_MODE)
@@ -24,9 +24,15 @@ def main():
             frame, test_landmarker.hand_result
         )
 
-        frame = draw_landmarks.draw_landmarks_on_face(
-            frame, test_landmarker.face_result
-        )
+        if GAME_MODE == 2:
+            frame = draw_landmarks.draw_landmarks_on_face(
+                frame, test_landmarker.face_result
+            )
+
+        try:
+            test_landmarker.get_index_tip_coordinates()
+        except:
+            pass
 
         # display image
         cv2.imshow("frame", frame)

@@ -1,6 +1,9 @@
 import time
 import mediapipe as mp
-import numpy as np
+from mediapipe import solutions
+from mediapipe.framework.formats import landmark_pb2
+from mediapipe.tasks import python
+from mediapipe.tasks.python import vision
 
 
 class MP_Controller:
@@ -74,6 +77,21 @@ class MP_Controller:
         if mode == 2:
             self.face_landmarker.detect_async(
                 image=mp_image, timestamp_ms=int(time.time() * 1000)
+            )
+
+    def get_index_tip_coordinates(self):
+        if self.hand_result.hand_landmarks != []:
+            print(
+                "HandLandmark.INDEX_FINGER_TIP result:\n {}".format(
+                    self.hand_result.hand_landmarks[0][8]
+                )
+            )  # (HandLandmark.INDEX_FINGER_TIP=8)
+
+            # GET INDEX_FINGER POSITION
+            return (
+                self.hand_result.hand_landmarks[0][8].x,
+                self.hand_result.hand_landmarks[0][8].y,
+                # self.hand_result.hand_landmarks[0][8].z,
             )
 
     def close(self):
